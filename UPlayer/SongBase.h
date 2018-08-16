@@ -10,11 +10,20 @@
 class SongBase
 {
 public:
-    SongBase() = default;
+    SongBase()
+        : SongDetailFile(new QFile(QString("SongDetail.txt"))),
+          UrlFile(new QFile(QString("Url.txt"))),
+          SongFileNetworkManager(new QNetworkAccessManager()),
+          UrlFileNetworkManager(new QNetworkAccessManager())
+    {
+
+    }
+
     virtual ~SongBase() = default;  
     // "Effective C++": Item07
     // "Declare destructors virtual in polymorphic base classes."
 
+    virtual void SearchSong(const QString&) = 0;
     virtual void WriteUrlFile() = 0;
     virtual void CloseUrlFile() = 0;
     virtual void WriteSongDetailFile() = 0;
@@ -36,7 +45,7 @@ public:
         return Status;
     }
 
-private:
+protected:
     bool Succeed;
     QString SongName;
     int Status;
