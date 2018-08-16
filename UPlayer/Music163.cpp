@@ -14,7 +14,6 @@ void Music163::PlaySong(const QModelIndex &Index)
 
 void Music163::SearchSong(const QString &SongName)
 {
-
 }
 
 void Music163::WriteSongDetailFile()

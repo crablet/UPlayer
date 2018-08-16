@@ -15,7 +15,7 @@ public:
 private:
     Ui::UPlayerClass ui;
 
-    Music163 Music163Player;
+    Music163 *Music163Player;
 
     void InitUI();
 
@@ -41,4 +41,11 @@ private slots:
     {
         std::exit(0);
     }
+};
+
+enum class SearchEngine : int
+{
+    Music163 = 0,
+    Kugou = 1,
+    Xiami = 2,
 };

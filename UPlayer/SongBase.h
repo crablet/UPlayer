@@ -30,7 +30,7 @@ public:
     virtual void CloseSongDetailFile() = 0;
     virtual void PlaySong(const QModelIndex&) = 0;
 
-    bool IsVaild() const noexcept
+    constexpr bool IsVaild() const noexcept
     {
         return Succeed;
     }
@@ -40,7 +40,7 @@ public:
         return SongName;
     }
 
-    int GetStatus() const noexcept
+    constexpr int GetStatus() const noexcept
     {
         return Status;
     }

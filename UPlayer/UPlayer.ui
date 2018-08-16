@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>809</width>
+    <width>831</width>
     <height>534</height>
    </rect>
   </property>
@@ -339,21 +339,7 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item row="0" column="1">
-           <widget class="QLabel" name="SongInfoLabel">
-            <property name="text">
-             <string>TextLabel</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <widget class="QLabel" name="ProcessInfoLabel">
-            <property name="text">
-             <string>TextLabel</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="7">
+          <item row="1" column="8">
            <widget class="QPushButton" name="VolumeButton">
             <property name="text">
              <string/>
@@ -364,7 +350,14 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="8">
+          <item row="0" column="3">
+           <widget class="QLabel" name="ProcessInfoLabel">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="9">
            <widget class="QPushButton" name="BtmSongListButton">
             <property name="text">
              <string/>
@@ -375,7 +368,14 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="9">
+          <item row="0" column="1">
+           <widget class="QLabel" name="SongInfoLabel">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="10">
            <widget class="QPushButton" name="pushButton">
             <property name="text">
              <string/>
@@ -386,14 +386,7 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="0" rowspan="2">
-           <widget class="QLabel" name="SongPictureLabel">
-            <property name="text">
-             <string>TextLabel</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="5">
+          <item row="1" column="6">
            <widget class="QPushButton" name="DownloadButton">
             <property name="text">
              <string/>
@@ -404,7 +397,48 @@
             </property>
            </widget>
           </item>
+          <item row="0" column="0" rowspan="2">
+           <widget class="QLabel" name="SongPictureLabel">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="3">
+           <widget class="QSlider" name="ProcessBarSlider">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="7">
+           <widget class="QPushButton" name="MoreInfoButton">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>Resources/Black/icon_246.png</normaloff>Resources/Black/icon_246.png</iconset>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="4">
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="5">
            <widget class="QPushButton" name="ILikeButton">
             <property name="text">
              <string/>
@@ -416,31 +450,10 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="1" colspan="2">
-           <widget class="QSlider" name="ProcessBarSlider">
+          <item row="0" column="2">
+           <spacer name="horizontalSpacer_4">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="6">
-           <widget class="QPushButton" name="MoreInfoButton">
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>Resources/Black/icon_246.png</normaloff>Resources/Black/icon_246.png</iconset>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="3">
-           <spacer name="horizontalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Fixed</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
