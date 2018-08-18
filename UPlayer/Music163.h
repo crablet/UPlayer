@@ -12,6 +12,7 @@ public:
     }
     ~Music163() = default;
 
+public slots:
     void SearchSong(const QString&) override;
     void WriteSongDetailFile() override;
     void CloseSongDetailFile() override;

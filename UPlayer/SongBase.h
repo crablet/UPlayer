@@ -1,14 +1,24 @@
 #pragma once
 
+#include <QtWidgets/QMainWindow>
 #include <QString>
 #include <QModelIndex>
 #include <QFile>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QUrl>
+#include <QJsonDocument>
+#include <QJsonValue>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QListWidget>
 
-class SongBase
+class UPlayer;
+
+class SongBase : public QObject
 {
+    Q_OBJECT
+
 public:
     SongBase()
         : SongDetailFile(new QFile(QString("SongDetail.txt"))),
@@ -23,6 +33,7 @@ public:
     // "Effective C++": Item07
     // "Declare destructors virtual in polymorphic base classes."
 
+public slots:
     virtual void SearchSong(const QString&) = 0;
     virtual void WriteUrlFile() = 0;
     virtual void CloseUrlFile() = 0;
@@ -30,6 +41,7 @@ public:
     virtual void CloseSongDetailFile() = 0;
     virtual void PlaySong(const QModelIndex&) = 0;
 
+public:
     constexpr bool IsVaild() const noexcept
     {
         return Succeed;
@@ -55,4 +67,7 @@ protected:
                           *UrlFileNetworkManager;
     QNetworkReply *UrlFileReply, *SongFileReply;
     QUrl AllSongUrl, ASongUrl;
+
+public:
+    friend class UPlayer;
 };

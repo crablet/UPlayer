@@ -20,6 +20,13 @@ private:
     void InitUI();
 
 private slots:
+    void SearchSong();
+    //void WriteUrlFile();
+    //void CloseUrlFile();
+    //void WriteSongDetailFile();
+    //void CloseSongDetailFile();
+    void PlaySong(const QModelIndex&);
+
     void MaximizeWindow()
     {
         if (isMaximized())
@@ -41,6 +48,9 @@ private slots:
     {
         std::exit(0);
     }
+
+public:
+    friend void Music163::CloseUrlFile();
 };
 
 enum class SearchEngine : int

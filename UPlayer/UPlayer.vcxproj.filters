@@ -47,6 +47,9 @@
     <QtMoc Include="UPlayer.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="SongBase.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="UPlayer.ui">
@@ -59,9 +62,6 @@
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SongBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Music163.h">
       <Filter>Header Files</Filter>
     </ClInclude>
