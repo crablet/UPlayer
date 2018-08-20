@@ -12,6 +12,8 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QListWidget>
+#include <QMediaPlayer>
+#include "ui_UPlayer.h"
 
 class UPlayer;
 
@@ -24,7 +26,8 @@ public:
         : SongDetailFile(new QFile(QString("SongDetail.txt"))),
           UrlFile(new QFile(QString("Url.txt"))),
           SongFileNetworkManager(new QNetworkAccessManager()),
-          UrlFileNetworkManager(new QNetworkAccessManager())
+          UrlFileNetworkManager(new QNetworkAccessManager()),
+          Player(new QMediaPlayer())
     {
 
     }
@@ -67,6 +70,10 @@ protected:
                           *UrlFileNetworkManager;
     QNetworkReply *UrlFileReply, *SongFileReply;
     QUrl AllSongUrl, ASongUrl;
+
+    QMediaPlayer *Player;
+
+    Ui::UPlayerClass *ui;
 
 public:
     friend class UPlayer;

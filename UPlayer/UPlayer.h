@@ -9,6 +9,8 @@ class UPlayer : public QMainWindow
 {
     Q_OBJECT
 
+   friend class Music163;
+
 public:
     UPlayer(QWidget *parent = Q_NULLPTR);
 
@@ -48,9 +50,6 @@ private slots:
     {
         std::exit(0);
     }
-
-public:
-    friend void Music163::CloseUrlFile();
 };
 
 enum class SearchEngine : int

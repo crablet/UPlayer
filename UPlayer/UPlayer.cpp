@@ -22,7 +22,12 @@ void UPlayer::InitUI()
     ui.SearchEngineBox->addItem(u8"¿á¹·", static_cast<int>(SearchEngine::Kugou));
     ui.SearchEngineBox->addItem(u8"ÏºÃ×", static_cast<int>(SearchEngine::Xiami));
 
+    connect(ui.SearshSongBox, SIGNAL(returnPressed()), this, SLOT(SearchSong()));
+
     connect(ui.SongListWidget, SIGNAL(doubleClicked(const QModelIndex&)),
+        this, SLOT(PlaySong(const QModelIndex&)));
+
+    connect(ui.SongCandidateList, SIGNAL(doubleClicked(const QModelIndex&)),
         this, SLOT(PlaySong(const QModelIndex&)));
 }
 
@@ -34,6 +39,8 @@ void UPlayer::SearchSong()
         auto Engine = ui.SearchEngineBox->currentData();
         if (Engine == static_cast<int>(SearchEngine::Music163))
         {
+            // CAUTION!!! YOU SHOULD NEW!!!
+            Music163Player = new Music163(ui);
             Music163Player->SearchSong(SongName);
         }
         else if (Engine == static_cast<int>(SearchEngine::Kugou))
@@ -121,7 +128,7 @@ void UPlayer::PlaySong(const QModelIndex &Index)
     if (Engine == static_cast<int>(SearchEngine::Music163))
     {
         // This function should implement at this place.
-        //Music163Player->PlaySong(Index);
+        Music163Player->PlaySong(Index);
     }
     else if (Engine == static_cast<int>(SearchEngine::Kugou))
     {
