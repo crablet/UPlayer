@@ -1,5 +1,7 @@
 #include "UPlayer.h"
 #include "Music163.h"
+#include "SongInfo.h"
+
 
 UPlayer::UPlayer(QWidget *parent)
     : QMainWindow(parent)

@@ -14,6 +14,7 @@
 #include <QListWidget>
 #include <QMediaPlayer>
 #include "ui_UPlayer.h"
+#include "SongInfo.h"
 
 class UPlayer;
 
@@ -78,3 +79,5 @@ protected:
 public:
     friend class UPlayer;
 };
+
+

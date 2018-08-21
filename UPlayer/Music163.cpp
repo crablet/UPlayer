@@ -14,39 +14,32 @@ void Music163::CloseUrlFile()
 
     // delete UrlFile;
     // UrlFile = nullptr;
+
     auto Doc = QJsonDocument::fromJson(Str);
     if (Doc.isObject())
     {
-        auto Obj = Doc.object();
-        if (Obj.contains("result"))
+        auto SongsArr = Doc.object().value("result").toObject().value("songs").toArray();
+        for (const auto &r : SongsArr)
         {
-            auto Result = Obj.value("result");
-            if (Result.isObject())
-            {
-                auto ResultObj = Result.toObject();
-                if (ResultObj.contains("songs"))
-                {
-                    auto Songs = ResultObj.value("songs");
-                    if (Songs.isArray())
-                    {
-                        auto SongsArr = Songs.toArray();
-                        for (const auto &r : SongsArr)
-                        {
-                            auto SongObj = r.toObject();
-                            auto ID = SongObj.value("id").toVariant().toString();
+            auto SongObj = r.toObject();
+            auto ID = SongObj.value("id").toVariant().toString();
+            auto SongName = SongObj.value("name").toString();
+            auto Singer = SongObj.value("artists").toArray()[0].toObject().value("name").toString();
 
-                            auto Item = new QListWidgetItem();
-                            Item->setData(Qt::UserRole, ID);
-                            Item->setText(SongObj.value("name").toString());
-                            
-                            // How to add "pointer ui"?
-                            ui->SongCandidateList->addItem(Item);
-                            qDebug() << ID;
-                        }
-                    }
-                }
-            }
+            auto Info = SongInfo(SongName, Singer, ID, SearchEngine::Music163);
+
+            auto Item = new QListWidgetItem();
+            Item->setData(Qt::UserRole, ID);
+            Item->setText(SongObj.value("name").toString());
+
+            // How to add "pointer ui"?
+            ui->SongCandidateList->addItem(Item);
+            qDebug() << ID;
         }
+    }
+    else
+    {
+        qDebug() << "Invalid JSON file.";
     }
 }
 

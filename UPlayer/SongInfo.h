@@ -1,25 +1,31 @@
 #pragma once
 #include <QString>
 #include <utility>
-#include "UPlayer.h"
+
+enum class SearchEngine : int
+{
+    Music163 = 0,
+    Kugou = 1,
+    Xiami = 2,
+};
 
 class SongInfo
 {
 public:
     SongInfo() = default;
     
-    SongInfo(const QString &SN)
-        : SongName(SN)
+    SongInfo(const QString &SongName, const QString &ID)
+        : SongName(SongName), ID(ID)
     {
     }
 
-    SongInfo(const QString &SongName, const QString &Singer, SearchEngine Source)
-        : SongName(SongName), Singer(Singer), Source(Source)
+    SongInfo(const QString &SongName, const QString &Singer, const QString &ID, SearchEngine Source)
+        : SongName(SongName), Singer(Singer), ID(ID), Source(Source)
     {
     }
 
     SongInfo(const SongInfo &rhs)
-        : SongName(rhs.SongName), Singer(rhs.Singer), Source(rhs.Source)
+        : SongName(rhs.SongName), Singer(rhs.Singer), ID(ID), Source(rhs.Source)
     {
     }
 
@@ -27,6 +33,7 @@ public:
     {
         SongName = std::move(rhs.SongName);
         Singer = std::move(rhs.Singer);
+        ID = std::move(rhs.ID);
         Source = std::move(rhs.Source);
     }
 
@@ -40,6 +47,7 @@ public:
         {
             SongName = rhs.SongName;
             Singer = rhs.Singer;
+            ID = rhs.ID;
             Source = rhs.Source;
         }
 
@@ -56,6 +64,7 @@ public:
         {
             SongName = std::move(rhs.SongName);
             Singer = std::move(rhs.Singer);
+            ID = std::move(rhs.ID);
             Source = std::move(rhs.Source);
         }
 
@@ -67,5 +76,8 @@ public:
 public:
     QString SongName;
     QString Singer;
+    QString ID;
     SearchEngine Source;
 };
+
+

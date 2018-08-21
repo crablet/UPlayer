@@ -52,9 +52,4 @@ private slots:
     }
 };
 
-enum class SearchEngine : int
-{
-    Music163 = 0,
-    Kugou = 1,
-    Xiami = 2,
-};
+
