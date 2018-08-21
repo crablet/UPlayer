@@ -103,6 +103,8 @@ void Music163::CloseSongDetailFile()
                 auto DataArr = Data.toArray();
                 auto Url = DataArr[0].toObject().value("url").toString();
 
+                ui->SongListWidget->addItem(Url);
+
                 Player->setMedia(QUrl(Url));
                 Player->play();
                 qDebug() << Url;

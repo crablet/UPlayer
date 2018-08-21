@@ -45,17 +45,17 @@ public slots:
     virtual void PlaySong(const QModelIndex&) = 0;
 
 public:
-    constexpr bool IsVaild() const noexcept
+    constexpr auto IsVaild() const noexcept
     {
         return Succeed;
     }
 
-    const QString& GetSongName() const noexcept
+    const auto& GetSongName() const noexcept
     {
         return SongName;
     }
 
-    constexpr int GetStatus() const noexcept
+    constexpr auto GetStatus() const noexcept
     {
         return Status;
     }

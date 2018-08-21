@@ -42,6 +42,9 @@
     <ClCompile Include="Music163.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SongInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="UPlayer.h">
@@ -63,6 +66,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Music163.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SongInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
