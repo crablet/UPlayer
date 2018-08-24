@@ -38,11 +38,14 @@ void UPlayer::SearchSong()
     auto SongName = ui.SearshSongBox->text();
     if (!SongName.isEmpty())
     {
+        // Clear the last searching history.
+        ui.SongCandidateList->clear();
+
         auto Engine = ui.SearchEngineBox->currentData();
         if (Engine == static_cast<int>(SearchEngine::Music163))
         {
-            // CAUTION!!! YOU SHOULD NEW!!!
-            Music163Player = new Music163(ui);
+            // CAUTION!!! This is a SINGELTON!!!
+            Music163Player = &Music163::GetInstance(ui);
             Music163Player->SearchSong(SongName);
         }
         else if (Engine == static_cast<int>(SearchEngine::Kugou))

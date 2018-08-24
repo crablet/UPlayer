@@ -1,4 +1,5 @@
 #include "Music163.h"
+#include <QMessageBox>
 
 void Music163::WriteUrlFile()
 {
@@ -26,11 +27,21 @@ void Music163::CloseUrlFile()
             auto SongName = SongObj.value("name").toString();
             auto Singer = SongObj.value("artists").toArray()[0].toObject().value("name").toString();
 
+            // TODO: check if NULL
+            if (ID.isEmpty() || SongName.isEmpty() || Singer.isEmpty())
+            {
+                QMessageBox WarningBox;
+                WarningBox.setWindowTitle("Error!");
+                WarningBox.setText("Invalid JSON file.");
+                WarningBox.exec();
+
+                break;
+            }
             auto Info = SongInfo(SongName, Singer, ID, SearchEngine::Music163);
 
             auto Item = new QListWidgetItem();
-            Item->setData(Qt::UserRole, ID);
-            Item->setText(SongObj.value("name").toString());
+            Item->setData(Qt::UserRole, QVariant::fromValue(Info));
+            Item->setText(SongName + '-' + Singer);
 
             // How to add "pointer ui"?
             ui->SongCandidateList->addItem(Item);
@@ -39,15 +50,23 @@ void Music163::CloseUrlFile()
     }
     else
     {
-        qDebug() << "Invalid JSON file.";
+        QMessageBox WarningBox;
+        WarningBox.setWindowTitle("Error!");
+        WarningBox.setText("Invalid JSON file.");
+        WarningBox.exec();
     }
 }
 
 void Music163::PlaySong(const QModelIndex &Index)
 {
-    auto ID = Index.data(Qt::UserRole).toString();
-    ui->SongInfoLabel->setText(ID);
+    auto Info = Index.data(Qt::UserRole).value<SongInfo>();
 
+    auto Singer = Info.Singer;
+    auto SongName = Info.SongName;
+    ui->SongInfoLabel->setText(SongName + '-' + Singer);
+    ui->SongListWidget->addItem(SongName + '-' + Singer);
+
+    auto ID = Info.ID;
     ASongUrl = QUrl::fromUserInput("http://v1.hitokoto.cn/nm/url/" + ID);
     SongFileReply = SongFileNetworkManager->get(QNetworkRequest(ASongUrl));
 
@@ -57,12 +76,43 @@ void Music163::PlaySong(const QModelIndex &Index)
 
 void Music163::SearchSong(const QString &SongName)
 {
+    // Clear the file.
+    if (SongDetailFile->isOpen())
+    {
+        SongDetailFile->close();
+        SongDetailFile->open(QIODevice::Text | QIODevice::ReadWrite | QIODevice::Truncate);
+        SongDetailFile->close();
+        SongDetailFile->open(QIODevice::Text | QIODevice::ReadWrite | QIODevice::Truncate);
+    }
+    else
+    {
+        SongDetailFile->open(QIODevice::Text | QIODevice::ReadWrite | QIODevice::Truncate);
+        SongDetailFile->close();
+        SongDetailFile->open(QIODevice::Text | QIODevice::ReadWrite | QIODevice::Truncate);
+    }
+
+    // Clear the file.
+    if (UrlFile->isOpen())
+    {
+        UrlFile->close();
+        UrlFile->open(QIODevice::Text | QIODevice::ReadWrite | QIODevice::Truncate);
+        UrlFile->close();
+        UrlFile->open(QIODevice::Text | QIODevice::ReadWrite | QIODevice::Truncate);
+    }
+    else
+    {
+        UrlFile->open(QIODevice::Text | QIODevice::ReadWrite | QIODevice::Truncate);
+        UrlFile->close();
+        UrlFile->open(QIODevice::Text | QIODevice::ReadWrite | QIODevice::Truncate);
+    }
+
+
     AllSongUrl = QUrl::fromUserInput("http://v1.hitokoto.cn/nm/search/"
                + QUrl::toPercentEncoding(SongName)
                + "/?type=SONG");
     UrlFileReply = UrlFileNetworkManager->get(QNetworkRequest(AllSongUrl));
 
-    // Check it is useful?
+    // Check is it useful?
     connect(UrlFileReply, SIGNAL(readyRead()), this, SLOT(WriteUrlFile()));
     connect(UrlFileReply, SIGNAL(finished()), this, SLOT(CloseUrlFile()));
 }
@@ -96,10 +146,14 @@ void Music163::CloseSongDetailFile()
                 auto DataArr = Data.toArray();
                 auto Url = DataArr[0].toObject().value("url").toString();
 
-                ui->SongListWidget->addItem(Url);
+                connect(Player, SIGNAL(positionChanged(qint64)),
+                    this, SLOT(SongPositionChanged(qint64)));
+                connect(Player, SIGNAL(durationChanged(qint64)),
+                    this, SLOT(SongDurationChanged(qint64)));
 
                 Player->setMedia(QUrl(Url));
                 Player->play();
+                
                 qDebug() << Url;
             }
         }

@@ -30,7 +30,6 @@ public:
           UrlFileNetworkManager(new QNetworkAccessManager()),
           Player(new QMediaPlayer())
     {
-
     }
 
     virtual ~SongBase() = default;  
@@ -61,6 +60,11 @@ public:
         return Status;
     }
 
+public slots:
+    void SongPositionChanged(qint64);   // emit when slider is dragged
+    void SongDurationChanged(qint64);   // emit when song is playing
+    void SongSliderPositionChanged(qint64); // emit when slider is dragged
+
 protected:
     bool Succeed;
     QString SongName;
@@ -73,6 +77,8 @@ protected:
     QUrl AllSongUrl, ASongUrl;
 
     QMediaPlayer *Player;
+
+    QString PositionTime, DurationTime;
 
     Ui::UPlayerClass *ui;
 

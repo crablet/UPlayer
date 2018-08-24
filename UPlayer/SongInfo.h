@@ -1,5 +1,7 @@
 #pragma once
 #include <QString>
+#include <QVariant>
+#include <QMetaType>
 #include <utility>
 
 enum class SearchEngine : int
@@ -25,7 +27,7 @@ public:
     }
 
     SongInfo(const SongInfo &rhs)
-        : SongName(rhs.SongName), Singer(rhs.Singer), ID(ID), Source(rhs.Source)
+        : SongName(rhs.SongName), Singer(rhs.Singer), ID(rhs.ID), Source(rhs.Source)
     {
     }
 
@@ -80,4 +82,4 @@ public:
     SearchEngine Source;
 };
 
-
+Q_DECLARE_METATYPE(SongInfo)
